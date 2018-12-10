@@ -11,6 +11,7 @@ ENV DEBUG=""
 RUN mkdir /template
 
 COPY nginx-default.conf /template/nginx-default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
