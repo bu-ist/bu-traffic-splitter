@@ -1,0 +1,14 @@
+language: ruby
+
+services:
+  - docker
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+script:
+  - docker version
+  - cd tests
+  - scripts/all_cases.sh
