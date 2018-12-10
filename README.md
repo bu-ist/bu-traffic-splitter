@@ -32,7 +32,7 @@ proxied to the `app-server` container. The requests like
 etc will be proxied to the `static-content` container.
 
 ```
-version: "3.7"
+version: "3.4"
 
 services:
   app-server:
@@ -78,7 +78,7 @@ If you use the config similar to the one below, the following will happen:
 - Requests to `http://localhost:3000/cdn.com` will be proxied to `static-content`
 
 ```
-version: "3.7"
+version: "3.4"
 
 services:
   app-server:
@@ -119,7 +119,7 @@ If you use the config similar to the one below, the following will happen:
 
 
 ```
-version: "3.7"
+version: "3.4"
 
 services:
   app-server:

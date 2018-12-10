@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  host-output:
+    image: nginx:1.13
+    volumes:
+      - ./host-output:/var/www/html
+      - ./host-output.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 3050:80
+
+  splitter:
+    build: ..
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DEFAULT_URL: http://host-output
+      ALTERNATE_MASK: sub
+      ALTERNATE_URL: http://host-output
+    depends_on:
+      - host-output
