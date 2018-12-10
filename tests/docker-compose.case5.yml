@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  backend1:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend1:/app/public
+
+  protected.domain.com:
+    image: nginx:1.13
+    volumes:
+      - ./backend2:/var/www/html
+      - ./protected.domain.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 3050:80
+
+  splitter:
+    build: ..
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DEFAULT_URL: http://backend1:3000
+      INTERCEPT_MASK: protected.domain.com
+      ALTERNATE_REF: authorized.application.com
+    depends_on:
+      - backend1
+      - protected.domain.com

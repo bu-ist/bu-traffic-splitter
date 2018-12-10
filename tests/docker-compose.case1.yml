@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  backend1:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend1:/app/public
+
+  backend2:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend2:/app/public
+
+  splitter:
+    build: ..
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DEFAULT_URL: http://backend1:3000
+      ALTERNATE_MASK: file2
+      ALTERNATE_URL: http://backend2:3000
+    depends_on:
+      - backend1
+      - backend2
