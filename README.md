@@ -6,15 +6,16 @@ container to two other ones in your development environment.
 
 ## Environment Variables
 
-Variable name  | Default value
----------------|---------------
-DNS_RESOLVER   | auto
-DEFAULT_URL    | -
-ALTERNATE_MASK | -
-ALTERNATE_URL  | -
-INTERCEPT_URL  | -
-ALTERNATE_REF  | -
-DEBUG          | -
+Variable name        | Default value
+---------------------|---------------
+DNS_RESOLVER         | auto
+DNS_RESOLVER_TIMEOUT | auto
+DEFAULT_URL          | -
+ALTERNATE_MASK       | -
+ALTERNATE_URL        | -
+INTERCEPT_URL        | -
+ALTERNATE_REF        | -
+DEBUG                | -
 
 
 ## Sample Usage

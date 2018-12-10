@@ -63,7 +63,7 @@ export INTERCEPT_CONFIG
 export DEFAULT_CONFIG
 
 # Specify which environment variables to substitute
-vars_to_sub='$DNS_RESOLVER:$ALTERNATE_CONFIG:$DEFAULT_CONFIG:$INTERCEPT_CONFIG'
+vars_to_sub='$DNS_RESOLVER:$DNS_RESOLVER_TIMEOUT:$ALTERNATE_CONFIG:$DEFAULT_CONFIG:$INTERCEPT_CONFIG'
 
 # Substitute environment variables
 envsubst "$vars_to_sub" < /template/nginx-default.conf > /etc/nginx/conf.d/default.conf
