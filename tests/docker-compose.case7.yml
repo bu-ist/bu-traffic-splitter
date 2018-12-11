@@ -1,0 +1,43 @@
+version: "3.4"
+
+services:
+  backend1:
+    networks:
+      frontend:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend1:/app/public
+
+  backend2:
+    networks:
+      frontend:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend2:/app/public
+
+  dns:
+    image: bostonuniversity/dns-rotator:latest
+    networks:
+      frontend:
+        ipv4_address: 10.6.0.10
+
+  splitter:
+    build: ..
+    networks:
+      frontend:
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DNS_RESOLVER: 10.6.0.10
+      DNS_RESOLVER_TIMEOUT: 1s
+      DEFAULT_URL: http://backend1:3000
+    depends_on:
+      - backend1
+
+networks:
+  frontend:    
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.6.0.0/16
