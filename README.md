@@ -1,5 +1,7 @@
 # HTTP Traffic Splitter
 
+[![Build Status](https://travis-ci.org/bu-ist/bu-traffic-splitter.svg?branch=master)](https://travis-ci.org/bu-ist/bu-traffic-splitter)
+
 This docker image is helpful when you need to re-route HTTP requests from one
 container to two other ones in your development environment.
 
@@ -9,7 +11,7 @@ container to two other ones in your development environment.
 Variable name        | Default value
 ---------------------|---------------
 DNS_RESOLVER         | auto
-DNS_RESOLVER_TIMEOUT | auto
+DNS_RESOLVER_TIMEOUT | 30s
 DEFAULT_URL          | -
 ALTERNATE_MASK       | -
 ALTERNATE_URL        | -
@@ -17,6 +19,15 @@ INTERCEPT_URL        | -
 ALTERNATE_REF        | -
 DEBUG                | -
 
+`DEBUG` variable when set to `1` allows you to see the resulting NGINX config.
+
+`DNS_RESOLVER` allows to specify the IP address for the custom DNS resolver.
+The default value (`auto`) will make the container to parse the value of the 
+default resolver for the container. If that fails, try to use `127.0.0.11`
+(helps only if the container is running inside some Docker network, for example,
+`docker-compose` does create a network).
+
+`DNS_RESOLVER_TIMEOUT` specifies for how long the DNS responses are cached.
 
 ## Sample Usage
 
