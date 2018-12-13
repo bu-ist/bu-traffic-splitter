@@ -1,0 +1,29 @@
+version: "3.4"
+
+services:
+  backend1:
+    image: tobilg/mini-webserver
+    volumes:
+      - ./backend1:/app/public
+
+  host-protected.domain.com:
+    image: nginx:1.13
+    volumes:
+      - ./backend2:/var/www/html
+      - ./host-protected.domain.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 3050:80
+
+  splitter:
+    build: ..
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DEFAULT_URL: http://backend1:3000
+      ALTERNATE_MASK: file1
+      ALTERNATE_URL: http://host-protected.domain.com
+      ALTERNATE_HOST: host-protected.domain.com
+    depends_on:
+      - backend1
+      - host-protected.domain.com
