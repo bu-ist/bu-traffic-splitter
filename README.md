@@ -15,8 +15,9 @@ DNS_RESOLVER_TIMEOUT | 30s
 DEFAULT_URL          | -
 ALTERNATE_MASK       | -
 ALTERNATE_URL        | -
-INTERCEPT_URL        | -
+ALTERNATE_HOST       | -
 ALTERNATE_REF        | -
+INTERCEPT_URL        | -
 DEBUG                | -
 
 `DEBUG` variable when set to `1` allows you to see the resulting NGINX config.
@@ -67,6 +68,32 @@ services:
 
 ```
 
+#### Forge Host For Alternate URL
+
+If you use the config above and the app is available on `localhost:3000`,
+the requests to the ALTERNATE_URL are sent with the header 
+`Host: localhost:3000`. But the server specified at ALTERNATE_URL may be
+configured to only serve content on certain hostname.
+
+The `ALTERNATE_HOST` environment variable will allow to set the host value:
+```
+...
+
+  splitter:
+    image: bostonuniversity/traffic-splitter:latest
+    ports:
+      - 3000:80
+    environment:
+      DEFAULT_URL: http://app-server:80
+      ALTERNATE_MASK: static
+      ALTERNATE_URL: http://protected-host.com
+      ALTERNATE_HOST: protected-host.com
+    depends_on:
+      - app-server
+      - static-content
+
+...
+```
 
 ### Intercept Traffic Outside Of Docker Network
 
