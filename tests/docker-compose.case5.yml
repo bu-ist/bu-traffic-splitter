@@ -6,11 +6,11 @@ services:
     volumes:
       - ./backend1:/app/public
 
-  protected.domain.com:
+  ref-protected.domain.com:
     image: nginx:1.13
     volumes:
       - ./backend2:/var/www/html
-      - ./protected.domain.conf:/etc/nginx/conf.d/default.conf
+      - ./ref-protected.domain.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 3050:80
 
@@ -21,8 +21,8 @@ services:
     environment:
       DEBUG: 1
       DEFAULT_URL: http://backend1:3000
-      INTERCEPT_MASK: protected.domain.com
+      INTERCEPT_MASK: ref-protected.domain.com
       ALTERNATE_REF: authorized.application.com
     depends_on:
       - backend1
-      - protected.domain.com
+      - ref-protected.domain.com

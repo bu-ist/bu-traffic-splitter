@@ -15,13 +15,13 @@ function down() {
 up
 
 file1=`curl -sS localhost:3000/index.html`
-if [[ $file1 == *"http://localhost:3000/protected.domain.com/file1.txt"* ]]; then true; else
+if [[ $file1 == *"http://localhost:3000/ref-protected.domain.com/file1.txt"* ]]; then true; else
     echo "Wrong output: $file1"
     down
     exit 1
 fi
 
-file2=`curl -sS http://localhost:3000/protected.domain.com/file1.txt`
+file2=`curl -sS http://localhost:3000/ref-protected.domain.com/file1.txt`
 if [[ $file2 != "backend2_file1" ]]; then
     echo "Wrong output: $file2"
     down
