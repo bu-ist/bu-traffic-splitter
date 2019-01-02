@@ -14,7 +14,7 @@ function down() {
 
 up
 
-file1=`curl localhost:3000/file1.txt -H "Host: host-protected.domain.com"`
+file1=`curl -s localhost:3000/file1.txt -H "Host: host-protected.domain.com"`
 if [[ $file1 != "backend1_file1" ]]; then
     echo "Wrong output: $file1"
     down
