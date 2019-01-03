@@ -41,8 +41,6 @@ else
 
   else
     DEFAULT_CONFIG='  location / {
-    proxy_set_header Accept-Encoding "";
-    proxy_set_header Host $host;
     proxy_pass DEFAULT_URL$request_uri;
     sub_filter_once off;
     # sub_filter_types text/html;
