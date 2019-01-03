@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  backend1:
+    image: nginx:1.13
+    volumes:
+      - ./proto-output.conf:/etc/nginx/conf.d/default.conf
+
+  splitter:
+    build: ..
+    ports:
+      - 3000:80
+    environment:
+      DEBUG: 1
+      DEFAULT_URL: http://backend1
+      INTERCEPT_MASK: backend2
+    depends_on:
+      - backend1

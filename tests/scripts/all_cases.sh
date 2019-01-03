@@ -9,4 +9,5 @@ scripts/case6.sh && \
 scripts/case7.sh && \
 scripts/case8.sh && \
 scripts/case9.sh && \
-scripts/case10.sh
+scripts/case10.sh && \
+scripts/case11.sh
